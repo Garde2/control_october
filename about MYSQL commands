@@ -59,7 +59,7 @@ CREATE TABLE dog
     Birthday DATE,
     Commands VARCHAR(50),
     Genus_id int,
-    Foreign KEY (Genus_id) REFERENCES home_animals (Id) ON DELETE CASCADE ON UPDATE CASCADE
+    Foreign KEY (Genus_id) REFERENCES homeAnimals (Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO dog (Name, Owner, Birthday, Commands, Genus_id)
@@ -75,7 +75,7 @@ CREATE TABLE cat
     Birthday DATE,
     Commands VARCHAR(50),
     Genus_id int,
-    Foreign KEY (Genus_id) REFERENCES home_animals (Id) ON DELETE CASCADE ON UPDATE CASCADE
+    Foreign KEY (Genus_id) REFERENCES homeAnimals (Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO cat (Name, Owner, Birthday, Commands, Genus_id)
@@ -83,17 +83,17 @@ VALUES ('Сержа2', 'Люся1', '2000-02-17', 'мяу', 2),
 ('Бьянка2', 'Маша1','2016-02-17', 'кис-кис, стоять', 2),  
 ('Машка2','Бьянка1', '2002-05-05','куда', 3);
 
-CREATE TABLE hamsters 
+CREATE TABLE hamster
 (       
     Id INT AUTO_INCREMENT PRIMARY KEY, 
     Name VARCHAR(20), 
     Birthday DATE,
     Commands VARCHAR(50),
     Genus_id int,
-    Foreign KEY (Genus_id) REFERENCES home_animals (Id) ON DELETE CASCADE ON UPDATE CASCADE
+    Foreign KEY (Genus_id) REFERENCES homeAnimals (Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-INSERT INTO hamster (Name, Birthday, Commands, Genus_id)
+INSERT INTO hamster (Name, Owner, Birthday, Commands, Genus_id)
 VALUES ('Один', 'Маша3', '2000-01-02', 'еда', 3),
 ('Тор', 'Маша5', '2000-01-03', 'вода', 3),  
 ('Морриган', 'Маша6', '2023-01-04', NULL, 3), 
@@ -106,11 +106,127 @@ CREATE TABLE mouse
     Birthday DATE,
     Commands VARCHAR(50),
     Genus_id int,
-    Foreign KEY (Genus_id) REFERENCES home_animals (Id) ON DELETE CASCADE ON UPDATE CASCADE
+    Foreign KEY (Genus_id) REFERENCES homeAnimals (Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-INSERT INTO hamsters (Name, Birthday, Commands, Genus_id)
+INSERT INTO mouse (Name, Owner, Birthday, Commands, Genus_id)
 VALUES ('альфа', 'Саша3', '2000-01-02', 'еда', 3),
 ('бета', 'Саша5', '2000-01-03', 'вода', 3),  
 ('гамма', 'Саша6', '2023-01-04', NULL, 3), 
 ('дельта','Саша6', '2023-01-05', NULL, 3);
+
+CREATE TABLE sheep
+(       
+    Id INT AUTO_INCREMENT PRIMARY KEY, 
+    Name VARCHAR(20), 
+    Birthday DATE,
+    Commands VARCHAR(50),
+    Genus_id int,
+    Foreign KEY (Genus_id) REFERENCES homeAnimals (Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO sheep (Name, Owner, Birthday, Commands, Genus_id)
+VALUES ('эта', 'Даша3', '2000-01-02', NULL, 3),
+('тэта', 'Даша5', '2000-01-03', NULL, 3),  
+('омикрон', 'Даша6', '2023-01-04', NULL, 3), 
+('пи','Даша6', '2023-01-05', NULL, 3);
+
+CREATE TABLE cow
+(       
+    Id INT AUTO_INCREMENT PRIMARY KEY, 
+    Name VARCHAR(20), 
+    Birthday DATE,
+    Commands VARCHAR(50),
+    Genus_id int,
+    Foreign KEY (Genus_id) REFERENCES homeAnimals (Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO cow (Name, Owner, Birthday, Commands, Genus_id)
+VALUES ('ро', 'Даша13', '2000-01-02', NULL, 3),
+('сигма', 'Даша15', '2000-01-03', NULL, 3),  
+('тау', 'Даша16', '2023-01-04', NULL, 3), 
+('фи','Даша16', '2023-01-05', NULL, 3);
+
+
+CREATE TABLE pork
+(       
+    Id INT AUTO_INCREMENT PRIMARY KEY, 
+    Name VARCHAR(20), 
+    Birthday DATE,
+    Commands VARCHAR(50),
+    Genus_id int,
+    Foreign KEY (Genus_id) REFERENCES homeAnimals (Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO pork (Name, Owner, Birthday, Commands, Genus_id)
+VALUES ('хи', 'Даша113', '2000-01-02', 'еда', 3),
+('пси', 'Даша115', '2000-01-03', 'еда', 3),  
+('омега', 'Даша116', '2023-01-04', 'еда', 3), 
+('эписилон','Даша116', '2023-01-05', 'еда', 3);
+
+
+CREATE TABLE camel
+(       
+    Id INT AUTO_INCREMENT PRIMARY KEY, 
+    Name VARCHAR(20), 
+    Birthday DATE,
+    Commands VARCHAR(50),
+    Genus_id int,
+    Foreign KEY (Genus_id) REFERENCES packAnimals (Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO camel (Name, Owner, Birthday, Commands, Genus_id)
+VALUES ('Мышастый', 'Вася', '2000-01-02', 'еда', 3),
+('Ушастый', 'Вася', '2000-01-03', 'еда', 3),  
+('Блохастый', 'Вася', '2023-01-04', 'еда', 3), 
+('Синюшный','ДВася', '2023-01-05', 'еда', 3);
+
+CREATE TABLE horse
+(       
+    Id INT AUTO_INCREMENT PRIMARY KEY, 
+    Name VARCHAR(20), 
+    Birthday DATE,
+    Commands VARCHAR(50),
+    Genus_id int,
+    Foreign KEY (Genus_id) REFERENCES packAnimals (Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO horse (Name, Owner, Birthday, Commands, Genus_id)
+VALUES ('Мышастый1', 'Вася2', '2000-01-02', 'тпру, ну, галоп', 1),
+('Ушастый1', 'Вася2', '2000-01-03', 'тпру, ну, галоп', 1),  
+('Блохастый1', 'Вася2', '2023-01-04', 'тпру, ну, галоп', 1), 
+('Синюшный1','ДВася2', '2023-01-05', 'тпру, ну, галоп', 1);
+
+CREATE TABLE mule
+(       
+    Id INT AUTO_INCREMENT PRIMARY KEY, 
+    Name VARCHAR(20), 
+    Birthday DATE,
+    Commands VARCHAR(50),
+    Genus_id int,
+    Foreign KEY (Genus_id) REFERENCES packAnimals (Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO mule (Name, Owner, Birthday, Commands, Genus_id)
+VALUES ('Мышастый10', 'Вася20', '2000-01-02', 'тпру, ну, галоп', 4),
+('Ушастый10', 'Вася20', '2000-01-03', 'тпру, ну, галоп', 4),  
+('Блохастый10', 'Вася20', '2023-01-04', 'тпру, ну, галоп', 4), 
+('Синюшный10','ДВася20', '2023-01-05', 'тпру, ну, галоп', 4);
+
+
+CREATE TABLE ox
+(       
+    Id INT AUTO_INCREMENT PRIMARY KEY, 
+    Name VARCHAR(20), 
+    Birthday DATE,
+    Commands VARCHAR(50),
+    Genus_id int,
+    Foreign KEY (Genus_id) REFERENCES packAnimals (Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO ox (Name, Owner, Birthday, Commands, Genus_id)
+VALUES ('Валя', 'катя', '2000-01-02', 'тпру, ну, галоп',5),
+('тоня', 'петя', '2000-01-03', 'тпру, ну, галоп', 5),  
+('маня', 'ева', '2023-01-04', 'тпру, ну, галоп', 5), 
+('уля','миша', '2023-01-05', 'тпру, ну, галоп', 5);
+
