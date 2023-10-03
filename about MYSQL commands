@@ -255,10 +255,36 @@ UNION SELECT *, 'Мышь' AS genus FROM mouse;
 UNION SELECT *, 'Ковца' AS genus FROM sheep;
 UNION SELECT *, 'Поросенок' AS genus FROM pork;
 
-CREATE TABLE yangAnimals AS
+CREATE TABLE youngAnimals AS
 SELECT Name, Owner, Birthday, Commands, genus, TIMESTAMPDIFF(MONTH, Birthday, CURDATE()) AS Age_in_month
 FROM animals WHERE Birthday BETWEEN ADDDATE(curdate(), INTERVAL -3 YEAR) AND ADDDATE(CURDATE(), INTERVAL -1 YEAR);
  
-SELECT * FROM yangAnimals;
+SELECT * FROM youngAnimals;
 
+12. Объединить все таблицы в одну, при этом сохраняя поля, указывающие на
+прошлую принадлежность к старым таблицам.
 
+SELECT ho.Name, ho.Owner, ho.Birthday, ho.Commands, pa.Genus_name, ya.Age_in_month 
+FROM horse ho
+LEFT JOIN youngAnimals ya ON ya.Name = ho.Name
+LEFT JOIN packAnimals pa ON pa.Id = ho.Genus_id
+UNION 
+SELECT mu.Name, mu.Owner, mu.Birthday, mu.Commands, pa.Genus_name, ya.Age_in_month 
+FROM mule mu 
+LEFT JOIN youngAnimals ya ON ya.Name = mu.Name
+LEFT JOIN packAnimals pa ON pa.Id = mu.Genus_id
+UNION
+SELECT c.Name, c.Owner, c.Birthday, c.Commands, ha.Genus_name, ya.Age_in_month 
+FROM cat c
+LEFT JOIN youngAnimals ya ON ya.Name = c.Name
+LEFT JOIN homeAnimals ha ON ha.Id = c.Genus_id
+UNION
+SELECT d.Name, d.Owner, d.Birthday, d.Commands, ha.Genus_name, ya.Age_in_month 
+FROM dog d
+LEFT JOIN youngAnimals ya ON ya.Name = d.Name
+LEFT JOIN homeAnimals ha ON ha.Id = d.Genus_id
+UNION
+SELECT ha.Name, ha.Owner, ha.Birthday, ha.Commands, ha.Genus_name, ya.Age_in_month 
+FROM hamster hm
+LEFT JOIN youngAnimals ya ON ya.Name = ha.Name
+LEFT JOIN homeAnimals ha ON ha.Id = ha.Genus_id;
