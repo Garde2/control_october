@@ -238,3 +238,27 @@ DELETE FROM camel;
 
 SELECT Name, Owner, Birthday, Commands FROM horse
 UNION SELECT  Name, Owner, Birthday, Commands FROM mule;
+
+11.Создать новую таблицу “молодые животные” в которую попадут все
+животные старше 1 года, но младше 3 лет и в отдельном столбце с точностью
+до месяца подсчитать возраст животных в новой таблицe
+
+CREATE TEMPORARY TABLE animals AS 
+SELECT *, 'Лошадь' as genus FROM horse
+UNION SELECT *, 'Мул/Осёл' AS genus FROM mule
+UNION SELECT *, 'Верблюд' AS genus FROM camel
+UNION SELECT *, 'Вол' AS genus FROM ox;
+UNION SELECT *, 'Кошка' AS genus FROM cat
+UNION SELECT *, 'Хомяк' AS genus FROM hamster;
+UNION SELECT *, 'Собака' AS genus FROM dog;
+UNION SELECT *, 'Мышь' AS genus FROM mouse;
+UNION SELECT *, 'Ковца' AS genus FROM sheep;
+UNION SELECT *, 'Поросенок' AS genus FROM pork;
+
+CREATE TABLE yangAnimals AS
+SELECT Name, Owner, Birthday, Commands, genus, TIMESTAMPDIFF(MONTH, Birthday, CURDATE()) AS Age_in_month
+FROM animals WHERE Birthday BETWEEN ADDDATE(curdate(), INTERVAL -3 YEAR) AND ADDDATE(CURDATE(), INTERVAL -1 YEAR);
+ 
+SELECT * FROM yangAnimals;
+
+
