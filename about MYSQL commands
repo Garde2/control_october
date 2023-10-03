@@ -1,1 +1,59 @@
+7. В подключенном MySQL репозитории создать базу данных “Друзья
+человека”
 
+CREATE DATABASE manFriends;
+
+8. Cоздать таблицы с иерархией из диаграммы в БД
+USE manFriends;
+CREATE TABLE animalClasses
+(
+	Id INT AUTO_INCREMENT PRIMARY KEY, 
+	Class_name VARCHAR(20)
+);
+
+INSERT INTO animalClasses (Class_name)
+VALUES ('вьючные'),
+('домашние');  
+
+
+CREATE TABLE packAnimals
+(
+	  Id INT AUTO_INCREMENT PRIMARY KEY,
+    Genus_name VARCHAR (20),
+    Class_id INT,
+    FOREIGN KEY (Class_id) REFERENCES animalClasses (Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO packCnimals (Genus_name, Class_id)
+VALUES ('Верблюд', 1),
+('Вол', 2),  
+('Мул', 3),
+('Вол', 1); 
+    
+CREATE TABLE homeАnimals
+(
+	  Id INT AUTO_INCREMENT PRIMARY KEY,
+    Genus_name VARCHAR (20),
+    Class_id INT,
+    FOREIGN KEY (Class_id) REFERENCES animalСlasses (Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO homeAnimals (Genus_name, Class_id)
+VALUES ('Coбака', 1),
+('Кошка', 2),  
+('Хомяк', 3),  
+('Мышь', 1),  
+('Корова', 2),  
+('Овца', 3),  
+('Поросёнок', 1); 
+
+CREATE TABLE dog 
+(       
+    Id INT AUTO_INCREMENT PRIMARY KEY, 
+    Name VARCHAR(20), 
+    Owner VARCHAR(20),
+    Birthday DATE,
+    Adress VARCHAR(50),
+    Genus_id int,
+    Foreign KEY (Genus_id) REFERENCES home_animals (Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
