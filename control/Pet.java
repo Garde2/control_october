@@ -8,8 +8,7 @@ public abstract class Pet {
     protected int petId;
     protected String name;
     protected String owner;
-    protected LocalDate birthday;
-    protected String command;
+    protected LocalDate birthday;    
     
     public void setPetId(int petId) {
         this.petId = petId;
@@ -48,16 +47,8 @@ public abstract class Pet {
         return formatter.format(birthday);
     }
 
-    public void setCommand(String command) {
-        this.command = command;
-    }
-
-    public String getCommand() {
-        return command;
-    }
-
     @Override
     public String toString() {
-        return String.format("%d. %s: имя: %s, хозяин: %s, дата рождения: %s, команда: %s ", getPetId(), getClass().getSimpleName(), name, owner, getBirthday(), command);
+        return String.format("%d. %s: имя: %s, хозяин: %s, дата рождения: %s ", getPetId(), getClass().getSimpleName(), name, owner, getBirthday());
     }
 }

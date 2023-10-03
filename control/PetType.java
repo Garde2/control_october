@@ -4,7 +4,11 @@ public enum PetType {
     
     Cat,
     Dog,
-    Hamster;
+    Hamster,
+    Mouse,
+    Cow,
+    Sheep,
+    Pork;
 
     public static PetType getType (int typeId){
         switch (typeId){
