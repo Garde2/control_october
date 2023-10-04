@@ -7,7 +7,7 @@ public abstract class Pet {
     
     protected int petId;
     protected String name;
-    protected String owner;
+    //protected String owner;
     protected LocalDate birthday;    
     
     public void setPetId(int petId) {
@@ -26,13 +26,13 @@ public abstract class Pet {
         return name;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
+    //public void setOwner(String owner) {
+    //    this.owner = owner;
+    //}
 
-    public String getOwner() {
-        return owner;
-    }
+    //public String getOwner() {
+    //    return owner;
+    //}
 
     public void setBirthday(LocalDate date) {
         this.birthday = date;
@@ -49,6 +49,6 @@ public abstract class Pet {
 
     @Override
     public String toString() {
-        return String.format("%d. %s: имя: %s, хозяин: %s, дата рождения: %s ", getPetId(), getClass().getSimpleName(), name, owner, getBirthday());
+        return String.format("%d. %s: имя: %s, дата рождения: %s ", getPetId(), getClass().getSimpleName(), name, getBirthday());
     }
 }

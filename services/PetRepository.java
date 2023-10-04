@@ -31,17 +31,17 @@ public class PetRepository implements IRepository<Pet> {
             Class.forName("com.mysql.cj.jdbc.Driver");
             try (Connection dbConnection = getConnection()) {
                 sqlSt = dbConnection.createStatement();
-                SQLstr = "SELECT GenusId, Id, PetName, Owner, Birthday FROM pet_list ORDER BY Id";
+                SQLstr = "SELECT GenusId, Id, PetName, Birthday FROM pet_list ORDER BY Id";
                 resultSet = sqlSt.executeQuery(SQLstr);
                 while (resultSet.next()) {
 
                     PetType type = PetType.getType(resultSet.getInt(1));
                     int id = resultSet.getInt(2);
                     String name = resultSet.getString(3);
-                    String owner = resultSet.getString (4);
+                    //String owner = resultSet.getString (4);
                     LocalDate birthday = resultSet.getDate(5).toLocalDate();                    
                     
-                    pet = petCreator.createPet(type, name, owner, birthday);
+                    pet = petCreator.createPet(type, name, birthday);
                     pet.setPetId(id);
                     farm.add(pet);
                 }
@@ -60,7 +60,7 @@ public class PetRepository implements IRepository<Pet> {
             Class.forName("com.mysql.cj.jdbc.Driver");
             try (Connection dbConnection = getConnection()) {
 
-                SQLstr = "SELECT GenusId, Id, PetName, Owner, Birthday FROM pet_list WHERE Id = ?";
+                SQLstr = "SELECT GenusId, Id, PetName, Birthday FROM pet_list WHERE Id = ?";
                 PreparedStatement prepSt = dbConnection.prepareStatement(SQLstr);
                 prepSt.setInt(1, petId);
                 resultSet = prepSt.executeQuery();
@@ -70,11 +70,11 @@ public class PetRepository implements IRepository<Pet> {
                     PetType type = PetType.getType(resultSet.getInt(1));
                     int id = resultSet.getInt(2);
                     String name = resultSet.getString(3);
-                    String owner = resultSet.getString (4);
-                    LocalDate birthday = resultSet.getDate(5).toLocalDate();
+                    //String owner = resultSet.getString (4);
+                    LocalDate birthday = resultSet.getDate(4).toLocalDate();
                     
 
-                    pet = petCreator.createPet(type, name, owner, birthday);
+                    pet = petCreator.createPet(type, name, birthday);
                     pet.setPetId(id);
                 } 
                 return pet;
@@ -95,7 +95,7 @@ public class PetRepository implements IRepository<Pet> {
                 SQLstr = "INSERT INTO pet_list (PetName, Owner, Birthday, GenusId) SELECT ?, ?, (SELECT Id FROM pet_types WHERE Genus_name = ?)";
                 PreparedStatement prepSt = dbConnection.prepareStatement(SQLstr);
                 prepSt.setString(1, pet.getName());
-                prepSt.setString(2, pet.getOwner());
+                //prepSt.setString(2, pet.getOwner());
                 prepSt.setDate(3, Date.valueOf(pet.getBirthdayDate())); 
                 prepSt.setString(4, pet.getClass().getSimpleName());
                 
@@ -117,7 +117,6 @@ public class PetRepository implements IRepository<Pet> {
                 PreparedStatement prepSt = dbConnection.prepareStatement(SQLstr);
                 prepSt.setInt(1, id);
                 prepSt.setString(2, command);
-
                 prepSt.executeUpdate();
             }
         } catch (ClassNotFoundException | IOException | SQLException ex) {
@@ -159,11 +158,11 @@ public class PetRepository implements IRepository<Pet> {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             try (Connection dbConnection = getConnection()) {
-                SQLstr = "UPDATE pet_list SET PetName = ?, Owner = ?, Birthday = ? WHERE Id = ?";
+                SQLstr = "UPDATE pet_list SET PetName = ?, Birthday = ? WHERE Id = ?";
                 PreparedStatement prepSt = dbConnection.prepareStatement(SQLstr);
 
                 prepSt.setString(1, pet.getName());
-                prepSt.setString(2, pet.getOwner());
+                //prepSt.setString(2, pet.getOwner());
                 prepSt.setDate(3, Date.valueOf(pet.getBirthdayDate())); 
                 prepSt.setInt(4,pet.getPetId());
                 
